@@ -23,4 +23,3 @@ ___________
 
 1. Hosted in supabase
 
-# Fully Responsive
