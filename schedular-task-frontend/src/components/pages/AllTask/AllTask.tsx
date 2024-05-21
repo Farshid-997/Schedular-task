@@ -44,7 +44,7 @@ export default function AllTask() {
       const res = await deleteTask(id);
       if (res) {
         toast.success("Task Deleted successfully");
-       
+        window.location.reload()
       }
     } catch (err: any) {
       toast.error(err.message);
