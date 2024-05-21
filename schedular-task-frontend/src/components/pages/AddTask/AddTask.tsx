@@ -12,6 +12,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { Loader } from "@/components/loader/Loader";
+import { useCreateTaskMutation } from "@/redux/features/api/task/taskApi";
 
 type ITask = {
   title: string;
@@ -21,7 +22,7 @@ type ITask = {
 };
 
 export default function AddTask() {
-  // const [addTask] = useAddTaskMutation();
+  // const [createTask] = useCreateTaskMutation();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data:ITask) => {
@@ -43,7 +44,7 @@ export default function AddTask() {
 
     await axios.post('https://task-backend-flame.vercel.app/api/V1/task/create-task', formattedData);
 
-      
+     
       toast.success("Task Added successfully");
      
     } catch (err: any) {
@@ -64,7 +65,7 @@ export default function AddTask() {
           </div>
 
 
-          <h1 className="my-3  pl-4 text-3xl font-bold mt-20 ">
+          <h1 className="my-3  pl-4 text-3xl font-bold mt-20 font-sans">
             {" "}
             Create your Task
           </h1>
@@ -76,7 +77,7 @@ export default function AddTask() {
         <Loader />
       ) : (
         <Form submitHandler={onSubmit}>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 font-sans">
             <div className="mt-3 w-full px-4 sm:col-span-2 xl:col-span-1">
               <Label htmlFor="title">Title </Label>
               <FormInput name="title" placeholder="Write the title" />

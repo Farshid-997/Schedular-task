@@ -126,7 +126,7 @@ export default function AllTask() {
             </NavLink>
           </div>
 
-          <h1 className="my-3  pl-4 text-3xl font-bold mt-10 ">
+          <h1 className="my-3  pl-4 text-3xl font-bold mt-10 font-sans">
             {" "}
             Create your Task
           </h1>
@@ -134,7 +134,7 @@ export default function AllTask() {
 
         <NavLink to="/add-task">
           {" "}
-          <Button className="mb-4 ml-2 w-28 p-2 bg-green-600 hover:bg-green-600 ">
+          <Button className="mb-4 ml-2 w-28 p-2 bg-green-600 hover:bg-green-600 font-sans">
             Create New Task
           </Button>{" "}
         </NavLink>

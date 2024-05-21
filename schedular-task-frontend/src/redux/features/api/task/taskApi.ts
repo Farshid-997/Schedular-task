@@ -4,7 +4,7 @@ const TASK_URL = "/task"
 export const taskApi = apiSlice.injectEndpoints({
     endpoints: (build) => ({
       // create
-      addTask: build.mutation({
+      createTask: build.mutation({
         query: (data) => ({
           url: `${TASK_URL}/create-task`,
           method: "POST",
@@ -35,7 +35,7 @@ export const taskApi = apiSlice.injectEndpoints({
   })
   
   export const {
-  useAddTaskMutation,
+ useCreateTaskMutation,
   useAllTaskQuery,
   
   useDeleteTaskMutation
