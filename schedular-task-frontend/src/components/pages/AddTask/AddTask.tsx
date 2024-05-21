@@ -12,7 +12,8 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { Loader } from "@/components/loader/Loader";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import { taskSchema } from "@/schemas/task";
 
 type ITask = {
   title: string;
@@ -76,16 +77,16 @@ export default function AddTask() {
         {loading ? (
         <Loader />
       ) : (
-        <Form submitHandler={onSubmit}>
+        <Form submitHandler={onSubmit} resolver={yupResolver(taskSchema)}>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 font-sans">
             <div className="mt-3 w-full px-4 sm:col-span-2 xl:col-span-1">
               <Label htmlFor="title">Title </Label>
-              <FormInput name="title" placeholder="Write the title" />
+              <FormInput name="title" placeholder="Write the title" required/>
             </div>
 
             <div className="mt-3 w-full px-4 sm:col-span-2 xl:col-span-1">
               <Label htmlFor="date">Date </Label>
-              <FormInput name="date" type="date" />
+              <FormInput name="date" type="date" required />
             </div>
 
             
@@ -95,6 +96,7 @@ export default function AddTask() {
               <InputTextArea
                 name="description"
                 placeholder="Write the description"
+                required
               />
             </div>
           </div>
