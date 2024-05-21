@@ -6,7 +6,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     // baseUrl: `${config.apiUrl}`,
-    baseUrl: "http://localhost:7000/api/V1",
+    baseUrl: "https://task-backend-flame.vercel.app/api/V1",
 
     
   }),
@@ -15,5 +15,5 @@ export const apiSlice = createApi({
     "task",
     
   ],
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });

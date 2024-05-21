@@ -5,30 +5,35 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { Label } from "@/components/ui/label";
 import InputTextArea from "@/components/Forms/InputTextArea";
-import { useAddTaskMutation } from "@/redux/features/api/task/taskApi";
-import { useState } from "react";
+
 import toast from "react-hot-toast";
 import { Home } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import { Loader } from "@/components/loader/Loader";
 
 type ITask = {
   title: string;
   description: string;
   date: string;
-  time: string;
+  
 };
 
 export default function AddTask() {
-  const [addTask] = useAddTaskMutation();
+  // const [addTask] = useAddTaskMutation();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data:ITask) => {
-   console.log("data",data)
+   
     try {
       setLoading(true);
 
-      const dateTimeString = `${data.date}T${data.time}:00Z`;
+      const now = new Date();
+      const timeString = now.toTimeString().split(' ')[0]; // "HH:MM:SS"
+
+      // Combine date from input with current time
+      const dateTimeString = `${data.date}T${timeString}Z`;
       const formattedDate = new Date(dateTimeString).toISOString();
 
       const formattedData = {
@@ -36,14 +41,15 @@ export default function AddTask() {
         date: formattedDate,
       };
 
-      const res = await axios.post('http://localhost:7000/api/V1/task/create-task', formattedData);
+    await axios.post('https://task-backend-flame.vercel.app/api/V1/task/create-task', formattedData);
 
-      console.log("res",res);
+      
       toast.success("Task Added successfully");
+     
     } catch (err: any) {
       console.error(err.message);
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   };
 
@@ -53,7 +59,7 @@ export default function AddTask() {
         <div className="flex justify-start">
 
         <div className="mt-[88px]  text-[#64748b] ml-[16px]">
-            {" "}
+            {" "} 
           <NavLink to="/"><Home /></NavLink>  
           </div>
 
@@ -66,6 +72,9 @@ export default function AddTask() {
          
         </div>
 
+        {loading ? (
+        <Loader />
+      ) : (
         <Form submitHandler={onSubmit}>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
             <div className="mt-3 w-full px-4 sm:col-span-2 xl:col-span-1">
@@ -78,10 +87,7 @@ export default function AddTask() {
               <FormInput name="date" type="date" />
             </div>
 
-            <div className="mt-3 w-full px-4 sm:col-span-2 xl:col-span-1">
-              <Label htmlFor="time">Time</Label>
-              <FormInput name="time" type="time" />
-            </div>
+            
 
             <div className="mt-3 w-full px-4 sm:col-span-2 xl:col-span-1">
               <Label htmlFor="blogText">Description</Label>
@@ -96,6 +102,7 @@ export default function AddTask() {
             Create
           </Button>
         </Form>
+         )}
       </div>
     </>
   );

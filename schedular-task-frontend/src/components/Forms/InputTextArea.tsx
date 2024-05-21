@@ -44,14 +44,14 @@ Input.displayName = "Input"
 
 const InputTextArea = ({
   name,
-  type,
-  size = "large",
-  value,
-  id,
+  
+  
+ 
+  
   placeholder,
-  validation,
+  
   label,
-  readonly,
+ 
   required,
 }: IInput) => {
   const {

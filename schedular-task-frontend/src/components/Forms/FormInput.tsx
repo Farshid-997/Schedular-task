@@ -43,13 +43,12 @@ Input.displayName = "Input"
 const FormInput = ({
   name,
   type,
-  size = "large",
-  value,
-  id,
+ 
+ 
   placeholder,
-  validation,
+
   label,
-  readonly,
+
   required,
 }: IInput) => {
   const {

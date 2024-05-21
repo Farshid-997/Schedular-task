@@ -17,11 +17,11 @@ import {
   useAllTaskQuery,
   useDeleteTaskMutation,
 } from "@/redux/features/api/task/taskApi";
-import { useState } from "react";
+
 import toast from "react-hot-toast";
 
 export default function AllTask() {
-  const [loading, setLoading] = useState(false);
+  
 
   type Task = {
     id: string;
@@ -36,20 +36,19 @@ export default function AllTask() {
 
   const tasks = data?.data || [];
 
-  console.log("task", tasks);
+  
 
   const deleteHandler = async (id: string) => {
     try {
-      setLoading(true);
+     
       const res = await deleteTask(id);
       if (res) {
-        toast.success("Course Deleted successfully");
+        toast.success("Task Deleted successfully");
+       
       }
     } catch (err: any) {
       toast.error(err.message);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   const columns: ColumnDef<Task>[] = [
@@ -72,7 +71,7 @@ export default function AllTask() {
       cell: ({ row }) => (
         <span
           className={`px-4 py-1 rounded ${
-            row.original.status === "complete" ? "bg-green-900" : ""
+            row.original.status === "complete" ? "bg-green-900 text-white" : ""
           }`}
         >
           {row.original.status}
@@ -107,7 +106,7 @@ export default function AllTask() {
                   deleteHandler(tasks?.id);
                 }}
               >
-                Delete Video
+                Delete Task
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -135,16 +134,14 @@ export default function AllTask() {
 
         <NavLink to="/add-task">
           {" "}
-          <Button className="mb-4 ml-2 w-28 p-2 bg-green-600 hover:bg-green-600">
+          <Button className="mb-4 ml-2 w-28 p-2 bg-green-600 hover:bg-green-600 ">
             Create New Task
           </Button>{" "}
         </NavLink>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
+        
           <DataTable columns={columns} data={tasks} />
-        )}
+      
       </div>
     </>
   );
