@@ -1,3 +1,6 @@
+# Fully Responsive
+___________
+
 # Front-End Technologies
 
 1. React with vite
@@ -19,3 +22,5 @@
 # Database
 
 1. Hosted in supabase
+
+# Fully Responsive
